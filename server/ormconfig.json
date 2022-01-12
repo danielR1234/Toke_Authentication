@@ -1,0 +1,22 @@
+{
+    "name": "default",
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "postgres",
+    "password": "password",
+    "database": "kominal",
+    "synchronize": false,
+    "logging": false,
+    "entities": [
+        "dist/entities/**/*.js"
+     ],
+     "migrations": [
+        "dist/migrations/**/*.js"
+     ],
+     "cli": {
+        "entitiesDir": "src/entities",
+        "migrationsDir": "src/migrations"
+        
+     }
+ }
