@@ -1,6 +1,6 @@
-import { geneRateMd5Hash, saveMd5Hash } from './../../utils/saveMd5Hash'
-import { User } from './../../entities/User'
-import { UserRequest } from './../../types/interfaces/user-request.interface'
+import { geneRateMd5Hash, saveMd5Hash } from '../../utils/saveMd5Hash'
+import { User } from '../../entities/User'
+import { UserRequest } from '../../types/interfaces/user-request.interface'
 import { Response } from 'express'
 
 export const postTokenAndTan = async (req: UserRequest, res: Response) => {

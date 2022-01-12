@@ -14,7 +14,7 @@ export const postEmail = async (req: UserRequest, res: Response) => {
       if (user?.Mailadresse) {
         res.status(200).json({ message: 'You already have an Email address' })
       } else {
-        const updatedUser = await getConnection()
+        await getConnection()
           .createQueryBuilder()
           .update(User)
           .set({
@@ -24,8 +24,8 @@ export const postEmail = async (req: UserRequest, res: Response) => {
           .returning('*')
           .execute()
 
-        await saveTanAndHash(Token, Mailadresse)
-        res.status(200).json(updatedUser.raw[0])
+        const updatedUser = await saveTanAndHash(Token, Mailadresse)
+        res.status(200).json(updatedUser)
       }
     } else {
       res.status(404).json({ error: 'User with that Token does not exists' })

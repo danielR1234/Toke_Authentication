@@ -3,7 +3,7 @@ import { getConnection } from 'typeorm'
 import md5 from 'md5'
 
 export const saveMd5Hash = async (Tan: number, Token: string) => {
-  return await getConnection()
+  const updatedUser = await getConnection()
     .createQueryBuilder()
     .update(User)
     .set({
@@ -12,6 +12,8 @@ export const saveMd5Hash = async (Tan: number, Token: string) => {
     .where('Token = :Token', { Token })
     .returning('*')
     .execute()
+
+  return updatedUser.raw[0]
 }
 
 export const geneRateMd5Hash = (Tan: number, Token: string) => {

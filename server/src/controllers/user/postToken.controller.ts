@@ -11,8 +11,9 @@ export const postToken = async (req: UserRequest, res: Response) => {
 
     if (user?.Mailadresse) {
       // User already exists and has an Email address
-      await saveTanAndHash(Token, user.Mailadresse)
-      return res.status(200).json(user)
+      const updatedUser = await saveTanAndHash(Token, user.Mailadresse)
+      console.log('uuu', updatedUser)
+      return res.status(200).json(updatedUser)
     } else {
       if (!user) {
         // new User without an Email address
