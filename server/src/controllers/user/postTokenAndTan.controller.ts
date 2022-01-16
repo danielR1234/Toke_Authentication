@@ -9,7 +9,7 @@ export const postTokenAndTan = async (req: UserRequest, res: Response) => {
 
   if (user?.Mailadresse) {
     if (user.Hash === geneRateMd5Hash(Tan, Token)) {
-      return res.status(200).json(true)
+      return res.status(200).json({ user: user })
     } else {
       return res.status(404).json({
         error: 'Invalid credentials',

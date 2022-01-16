@@ -1,7 +1,7 @@
-import { User } from '../../entities/User'
 import { IRequest } from '.'
-import { DeepPartial, FindManyOptions } from 'typeorm'
+import { User } from '../../entities/User'
 
 export interface UserRequest extends IRequest {
   body: User
+  params: { Token: string }
 }
