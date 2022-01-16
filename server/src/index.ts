@@ -2,6 +2,7 @@ import express from 'express'
 import user from './routes/userRoutes'
 import { createConnection } from 'typeorm'
 import 'dotenv-safe/config'
+import cors from 'cors'
 
 const main = async () => {
   const connection = await createConnection()
@@ -12,7 +13,7 @@ const main = async () => {
   app.use(express.urlencoded({ extended: false }))
   // parse json
   app.use(express.json())
-
+  app.use(cors())
   app.use('/user', user)
 
   app.listen(process.env.PORT, () => {

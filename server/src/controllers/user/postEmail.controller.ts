@@ -1,9 +1,8 @@
-import { User } from './../../entities/User'
 import { Response } from 'express'
-import { UserRequest } from '../../types/interfaces'
 import { getConnection } from 'typeorm'
 import { saveTanAndHash } from '../../services'
-import { genRandomTan, saveRandomTan, saveMd5Hash } from '../../utils'
+import { UserRequest } from '../../types/interfaces'
+import { User } from './../../entities/User'
 
 export const postEmail = async (req: UserRequest, res: Response) => {
   try {
@@ -12,7 +11,7 @@ export const postEmail = async (req: UserRequest, res: Response) => {
 
     if (user) {
       if (user?.Mailadresse) {
-        res.status(200).json({ message: 'You already have an Email address' })
+        res.status(200).json({ error: 'You already have an Email address' })
       } else {
         await getConnection()
           .createQueryBuilder()
@@ -25,10 +24,10 @@ export const postEmail = async (req: UserRequest, res: Response) => {
           .execute()
 
         const updatedUser = await saveTanAndHash(Token, Mailadresse)
-        res.status(200).json(updatedUser)
+        res.status(200).json({ user: updatedUser })
       }
     } else {
-      res.status(404).json({ error: 'User with that Token does not exists' })
+      res.status(200).json({ error: 'User with that Token does not exists' })
     }
   } catch (err) {
     res.status(404).json(err.message)

@@ -2,18 +2,17 @@ import { Response } from 'express'
 import { saveTanAndHash } from '../../services'
 import { UserRequest } from '../../types/interfaces'
 import { User } from './../../entities'
-import { genRandomTan, saveRandomTan, saveMd5Hash } from '../../utils'
 
 export const postToken = async (req: UserRequest, res: Response) => {
   try {
+    console.log('hi')
     const { Token } = req.body
     const user = await User.findOne(Token)
 
     if (user?.Mailadresse) {
       // User already exists and has an Email address
       const updatedUser = await saveTanAndHash(Token, user.Mailadresse)
-      console.log('uuu', updatedUser)
-      return res.status(200).json(updatedUser)
+      return res.status(200).json({ user: updatedUser })
     } else {
       if (!user) {
         // new User without an Email address
