@@ -7,39 +7,39 @@ import { AppContext } from '../../Context/Context'
 import { Types } from '../../Context/Types'
 import { Response } from '../../types/interfaces'
 import axios from '../../utils/axios'
-import EmailForm from './EmailForm'
+import HashForm from './HashForm'
 
 export type FormValues = {
   Token: string
-  Mailadresse: string
+  Tan: string
 }
 
-const EmailAuthentication: React.FC = () => {
+const HashAuthentication: React.FC = () => {
   const form = useForm<FormValues>()
   const navigate = useNavigate()
   const { dispatch } = useContext(AppContext)
   const [error, setError] = useState<string>('')
 
-  const submit: SubmitHandler<FormValues> = async ({ Token, Mailadresse }) => {
-    console.log(Token, Mailadresse)
-    const { data } = await axios.post<any, Response>('email', {
-      Token,
-      Mailadresse,
-    })
+  const submit: SubmitHandler<FormValues> = async ({ Token, Tan }) => {
+    const data = await axios
+      .post<any, Response>('hash', {
+        Token,
+        Tan,
+      })
+      .catch(() => {
+        setError('Invalid Token or Tan')
+      })
     console.log('data', data)
-    if (data) {
-      if (data.error) {
-        return setError(data.error)
-      }
-      if (data.user) {
-        dispatch({
-          type: Types.SET_USER,
-          payload: {
-            user: data.user,
-          },
-        })
-        navigate('/tokenandtan')
-      }
+
+    if (data?.data?.user) {
+      localStorage.setItem('Token', Token)
+      dispatch({
+        type: Types.SET_USER,
+        payload: {
+          user: data.data.user,
+        },
+      })
+      navigate('/profile')
     }
   }
   return (
@@ -52,7 +52,7 @@ const EmailAuthentication: React.FC = () => {
       >
         <FormProvider {...form}>
           <form style={{ width: '100%' }} onSubmit={form.handleSubmit(submit)}>
-            <EmailForm />
+            <HashForm />
           </form>
           <Box mt={2}>
             {error && <Typography color='error'>{error} </Typography>}
@@ -63,4 +63,4 @@ const EmailAuthentication: React.FC = () => {
   )
 }
 
-export default EmailAuthentication
+export default HashAuthentication

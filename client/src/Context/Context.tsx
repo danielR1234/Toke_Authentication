@@ -1,23 +1,31 @@
 import React, {
   createContext,
   Dispatch,
+  useCallback,
   useEffect,
   useReducer,
+  useContext,
   useState,
 } from 'react'
+import { Response } from '../types/interfaces'
 import { InitialStateType } from '../types/types'
+import axios from '../utils/axios'
 import { UserActions, UserReducer } from './UserReducer'
+import { Types } from './Types'
 
 const initialState = {
   user: {
-    Token: null,
-    Mailadresse: null,
-    Tan: null,
-    Hash: null,
-    IBAN: null,
-    KrankenKasse: null,
-    Sozialversicherungsnummer: null,
-    Steurklasse: null,
+    authenticated: false,
+    user: {
+      Token: null,
+      Mailadresse: null,
+      Tan: null,
+      Hash: null,
+      IBAN: null,
+      KrankenKasse: null,
+      Sozialversicherungsnummer: null,
+      Steurklasse: null,
+    },
   },
 }
 
@@ -44,6 +52,26 @@ const AppProvider: React.FC = ({ children }) => {
     dispatch,
   })
 
+  const Token = localStorage.getItem('Token')
+
+  const persistUser = useCallback(async () => {
+    try {
+      if (Token) {
+        const data = await axios.get<any, Response>(`/${Token}`)
+        if (data.data.user) {
+          dispatch({
+            type: Types.SET_USER,
+            payload: {
+              user: data.data.user,
+            },
+          })
+        }
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }, [Token])
+
   // Merge local state into context state
   useEffect(() => {
     setContextValue((contextState: AppContextState) => ({
@@ -52,9 +80,22 @@ const AppProvider: React.FC = ({ children }) => {
     }))
   }, [state])
 
+  useEffect(() => {
+    persistUser()
+  }, [persistUser])
+
   return (
     <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
   )
 }
 
 export { AppProvider, AppContext }
+
+export const useIsAuthenticated = () => {
+  const {
+    state: {
+      user: { authenticated },
+    },
+  } = useContext(AppContext)
+  return authenticated
+}

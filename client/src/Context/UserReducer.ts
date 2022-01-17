@@ -19,12 +19,16 @@ export const UserReducer = (state: UserType, action: UserActions) => {
     case Types.SET_TOKEN:
       return {
         ...state,
-        Token: action.payload.Token,
+        user: {
+          ...state.user,
+          Token: action.payload.Token,
+        },
       }
     case Types.SET_USER:
       return {
         ...state,
-        state: action.payload.user,
+        authenticated: true,
+        user: action.payload.user,
       }
 
     default:

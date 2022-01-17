@@ -2,21 +2,23 @@ import { TextField } from '@mui/material'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
-interface Props {}
+interface Props {
+  defaultValue?: string
+}
 
-const InputToken: React.FC = (props: Props) => {
+const InputToken = ({ defaultValue }: Props) => {
   const { control } = useFormContext()
 
   return (
     <Controller
       name='Token'
       control={control}
-      defaultValue=''
+      defaultValue={defaultValue ? defaultValue : ''}
       rules={{
         required: 'Can not be emtpy',
         minLength: {
-          value: 10,
-          message: 'at least 10 symbols',
+          value: 3,
+          message: 'at least 3 symbols',
         },
       }}
       render={({ field, fieldState: { error } }) => (

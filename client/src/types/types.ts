@@ -1,12 +1,7 @@
 export type FormValues = {
   Token: string
 }
-
-export type InitialStateType = {
-  user: UserType
-}
-
-export type UserType = {
+export type User = {
   Token: string | null
   Mailadresse: string | null
   Tan: number | null
@@ -15,4 +10,13 @@ export type UserType = {
   KrankenKasse: string | null
   Sozialversicherungsnummer: string | null
   Steurklasse: string | null
+}
+
+export type UserType = {
+  authenticated: boolean
+  user: User
+}
+
+export type InitialStateType = {
+  user: UserType
 }
