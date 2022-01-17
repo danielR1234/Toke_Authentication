@@ -7,11 +7,11 @@ export const updateUser = async (req: UserRequest, res: Response) => {
   const {
     IBAN,
     Kirchensteuerpflichtig,
-    KrankenKasse,
+    Krankenkasse,
     Mailadresse,
     Sozialversicherungsnummer,
     Steueridentifikationsnummer,
-    Steurklasse,
+    Steuerklasse,
     Token,
   } = req.body
   const user = await User.findOne(Token)
@@ -23,11 +23,11 @@ export const updateUser = async (req: UserRequest, res: Response) => {
       .set({
         IBAN,
         Kirchensteuerpflichtig,
-        KrankenKasse,
+        Krankenkasse,
         Mailadresse,
         Sozialversicherungsnummer,
         Steueridentifikationsnummer,
-        Steurklasse,
+        Steuerklasse,
       })
       .where('Token = :Token', { Token })
       .returning('*')

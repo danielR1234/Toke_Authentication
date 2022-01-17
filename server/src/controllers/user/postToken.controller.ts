@@ -5,7 +5,6 @@ import { User } from './../../entities'
 
 export const postToken = async (req: UserRequest, res: Response) => {
   try {
-    console.log('hi')
     const { Token } = req.body
     const user = await User.findOne(Token)
 

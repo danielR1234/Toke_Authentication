@@ -13,11 +13,11 @@ export class User extends BaseEntity {
   @Column({ default: null, length: 45 })
   IBAN: string
   @Column({ default: null })
-  KrankenKasse: string
+  Krankenkasse: string
   @Column({ default: null })
   Sozialversicherungsnummer: string
   @Column({ default: null, length: 45 })
-  Steurklasse: string
+  Steuerklasse: string
   @Column({ default: null })
   Steueridentifikationsnummer: string
   @Column({ default: null })
