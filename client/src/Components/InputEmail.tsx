@@ -3,7 +3,7 @@ import { TextField } from '@mui/material'
 import { useFormContext, Controller } from 'react-hook-form'
 
 interface Props {
-  defaultValue?: string
+  defaultValue?: string | null
 }
 
 const InputEmail = ({ defaultValue }: Props) => {
@@ -13,7 +13,7 @@ const InputEmail = ({ defaultValue }: Props) => {
     <Controller
       name='Mailadresse'
       control={control}
-      defaultValue={defaultValue ? defaultValue : ''}
+      defaultValue={defaultValue ? defaultValue : null}
       rules={{
         required: 'Can not be emtpy',
         pattern: {

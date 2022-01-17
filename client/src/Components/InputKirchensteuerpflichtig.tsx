@@ -3,7 +3,7 @@ import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
 interface Props {
-  defaultValue?: string
+  defaultValue?: string | null
 }
 
 const InputKirchensteuerpflichtig = ({ defaultValue }: Props) => {
@@ -13,10 +13,7 @@ const InputKirchensteuerpflichtig = ({ defaultValue }: Props) => {
     <Controller
       name='Kirchensteuerpflichtig'
       control={control}
-      defaultValue={defaultValue ? defaultValue : ''}
-      rules={{
-        required: 'Can not be emtpy',
-      }}
+      defaultValue={defaultValue ? defaultValue : null}
       render={({ field, fieldState: { error } }) => (
         <TextField
           error={Boolean(error)}

@@ -25,7 +25,6 @@ export const UserReducer = (state: UserType, action: UserActions) => {
         },
       }
     case Types.SET_USER:
-      console.log('hallo')
       return {
         ...state,
         authenticating: false,

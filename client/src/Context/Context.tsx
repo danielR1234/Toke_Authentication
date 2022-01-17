@@ -65,8 +65,6 @@ const AppProvider: React.FC = ({ children }) => {
       },
     })
     if (Token) {
-      console.log('Token')
-      console.log('state', state)
       axios.get<any, Response>(`/${Token}`).then((data) => {
         dispatch({
           type: Types.SET_USER,
@@ -74,7 +72,6 @@ const AppProvider: React.FC = ({ children }) => {
             user: data.data.user,
           },
         })
-        console.log('data', data)
       })
     } else {
       dispatch({
@@ -92,7 +89,6 @@ const AppProvider: React.FC = ({ children }) => {
       ...contextState,
       state,
     }))
-    console.log('statee', state)
   }, [state])
 
   useEffect(() => {

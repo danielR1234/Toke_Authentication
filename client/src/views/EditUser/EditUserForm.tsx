@@ -1,17 +1,16 @@
+import { Box, Typography } from '@mui/material'
 import React, { useContext } from 'react'
 import {
-  SubmitButton,
-  InputToken,
-  InputTan,
   InputEmail,
+  InputIBAN,
+  InputKirchensteuerpflichtig,
   InputKrankenkasse,
   InputSozialversicherungsnummer,
   InputSteueridentifikationsnummer,
-  InputKirchensteuerpflichtig,
+  SubmitButton,
 } from '../../Components'
-import { AppContext } from '../../Context/Context'
-import { Box, Typography } from '@mui/material'
 import InputSteuerklasse from '../../Components/InputSteurklasse'
+import { AppContext } from '../../Context/Context'
 
 interface Props {}
 
@@ -20,10 +19,8 @@ const EditUserForm: React.FC = (props: Props) => {
     state: {
       user: { user },
     },
-    dispatch,
   } = useContext(AppContext)
   const {
-    Hash,
     IBAN,
     Kirchensteuerpflichtig,
     Krankenkasse,
@@ -31,29 +28,36 @@ const EditUserForm: React.FC = (props: Props) => {
     Sozialversicherungsnummer,
     Steueridentifikationsnummer,
     Steuerklasse,
-    Tan,
+
     Token,
   } = user
   return (
     <>
       <Typography>your Token : {Token}</Typography>
       <Box mt={2} mb={2}>
-        <InputEmail />
+        <InputEmail defaultValue={Mailadresse} />
       </Box>
       <Box mt={2} mb={2}>
-        <InputKrankenkasse />
+        <InputKrankenkasse defaultValue={Krankenkasse} />
       </Box>
       <Box mt={2} mb={2}>
-        <InputSozialversicherungsnummer />
+        <InputIBAN defaultValue={IBAN} />
       </Box>
       <Box mt={2} mb={2}>
-        <InputSteuerklasse />
+        <InputSozialversicherungsnummer
+          defaultValue={Sozialversicherungsnummer}
+        />
       </Box>
       <Box mt={2} mb={2}>
-        <InputSteueridentifikationsnummer />
+        <InputSteuerklasse defaultValue={Steuerklasse} />
       </Box>
       <Box mt={2} mb={2}>
-        <InputKirchensteuerpflichtig />
+        <InputSteueridentifikationsnummer
+          defaultValue={Steueridentifikationsnummer}
+        />
+      </Box>
+      <Box mt={2} mb={2}>
+        <InputKirchensteuerpflichtig defaultValue={Kirchensteuerpflichtig} />
       </Box>
 
       <Box

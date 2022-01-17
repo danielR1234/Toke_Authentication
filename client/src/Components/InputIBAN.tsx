@@ -1,9 +1,8 @@
 import { TextField } from '@mui/material'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
-
 interface Props {
-  defaultValue?: string
+  defaultValue?: string | null
 }
 
 const InputIBAN = ({ defaultValue }: Props) => {
@@ -13,10 +12,7 @@ const InputIBAN = ({ defaultValue }: Props) => {
     <Controller
       name='IBAN'
       control={control}
-      defaultValue={defaultValue ? defaultValue : ''}
-      rules={{
-        required: 'Can not be emtpy',
-      }}
+      defaultValue={defaultValue ? defaultValue : null}
       render={({ field, fieldState: { error } }) => (
         <TextField
           error={Boolean(error)}

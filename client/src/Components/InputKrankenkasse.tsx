@@ -3,7 +3,7 @@ import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
 interface Props {
-  defaultValue?: string
+  defaultValue?: string | null
 }
 
 const InputKrankenkasse = ({ defaultValue }: Props) => {
@@ -13,10 +13,7 @@ const InputKrankenkasse = ({ defaultValue }: Props) => {
     <Controller
       name='Krankenkasse'
       control={control}
-      defaultValue={defaultValue ? defaultValue : ''}
-      rules={{
-        required: 'Can not be emtpy',
-      }}
+      defaultValue={defaultValue ? defaultValue : null}
       render={({ field, fieldState: { error } }) => (
         <TextField
           error={Boolean(error)}

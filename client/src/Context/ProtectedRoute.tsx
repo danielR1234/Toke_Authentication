@@ -5,8 +5,7 @@ export const ProtectedRoute: React.FC<RouteProps> = (props) => {
   const authenticated = useIsAuthenticated()
   const authenticating = useIsAuthenticating()
   const { children } = props
-  console.log('auth', authenticated)
-  console.log('authf', authenticating)
+
   return (
     <>
       {authenticated && children}

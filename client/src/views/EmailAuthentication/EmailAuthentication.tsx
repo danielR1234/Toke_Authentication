@@ -18,7 +18,6 @@ const EmailAuthentication: React.FC = () => {
   const [error, setError] = useState<string>('')
 
   const submit: SubmitHandler<FormValues> = async ({ Token, Mailadresse }) => {
-    console.log(Token, Mailadresse)
     const { data } = await axios.post<any, Response>('email', {
       Token,
       Mailadresse,

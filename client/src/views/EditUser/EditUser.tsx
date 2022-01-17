@@ -10,37 +10,60 @@ import { Response } from '../../types/interfaces'
 import { SectionDefault } from '../../Components'
 
 export type FormValues = {
-  Token: string
-  Tan: string
+  Mailadresse: string
+  IBAN: string
+  Krankenkasse: string
+  Sozialversicherungsnummer: string
+  Steueridentifikationsnummer: string
+  Kirchensteuerpflichtig: string
+  Steuerklasse: string
 }
 
 const EditUser: React.FC = () => {
   const form = useForm<FormValues>()
   const navigate = useNavigate()
-  const { state, dispatch } = useContext(AppContext)
+
   const [error, setError] = useState<string>('')
-  console.log('USER', state)
-  const submit: SubmitHandler<FormValues> = async ({ Token, Tan }) => {
+  const [success, setSuccess] = useState<string>('')
+  const {
+    state: {
+      user: { user },
+    },
+    dispatch,
+  } = useContext(AppContext)
+  const submit: SubmitHandler<FormValues> = async ({
+    Mailadresse,
+    IBAN,
+    Kirchensteuerpflichtig,
+    Krankenkasse,
+    Sozialversicherungsnummer,
+    Steueridentifikationsnummer,
+    Steuerklasse,
+  }) => {
     const data = await axios
-      .post<any, Response>('hash', {
-        Token,
-        Tan,
+      .put<any, Response>('', {
+        Mailadresse,
+        IBAN,
+        Kirchensteuerpflichtig,
+        Krankenkasse,
+        Sozialversicherungsnummer,
+        Steueridentifikationsnummer,
+        Steuerklasse,
+        Token: user.Token,
       })
       .catch(() => {
         setError('Invalid Token or Tan')
       })
-    console.log('data', data)
 
     if (data?.data?.user) {
-      localStorage.setItem('Token', Token)
       dispatch({
         type: Types.SET_USER,
         payload: {
           user: data.data.user,
         },
       })
-      navigate('/profile')
     }
+    setSuccess('You have updated your Data :D')
   }
   return (
     <SectionDefault>
@@ -56,6 +79,7 @@ const EditUser: React.FC = () => {
           </form>
           <Box mt={2}>
             {error && <Typography color='error'>{error} </Typography>}
+            {success && <Typography color='success'>{error} </Typography>}
           </Box>
         </FormProvider>
       </Box>

@@ -29,7 +29,6 @@ const HashAuthentication: React.FC = () => {
       .catch(() => {
         setError('Invalid Token or Tan')
       })
-    console.log('data', data)
 
     if (data?.data?.user) {
       localStorage.setItem('Token', Token)
