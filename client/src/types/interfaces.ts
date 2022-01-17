@@ -4,9 +4,11 @@ export interface User {
   Tan: number | null
   Hash: string | null
   IBAN: string | null
-  KrankenKasse: string | null
+  Krankenkasse: string | null
   Sozialversicherungsnummer: string | null
-  Steurklasse: string | null
+  Steuerklasse: string | null
+  Steueridentifikationsnummer: string | null
+  Kirchensteuerpflichtig: string | null
 }
 
 export interface Data {

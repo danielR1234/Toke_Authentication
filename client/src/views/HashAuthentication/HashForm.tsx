@@ -1,7 +1,6 @@
-import { Box } from '@mui/material'
 import React from 'react'
-import InputTan from '../../Components/InputTan'
-import InputToken from '../../Components/InputToken'
+import { Box } from '@mui/material'
+import { InputTan, InputToken } from '../../Components'
 
 import SubmitButton from '../../Components/SubmitButton'
 

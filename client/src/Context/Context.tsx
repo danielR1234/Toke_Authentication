@@ -2,19 +2,20 @@ import React, {
   createContext,
   Dispatch,
   useCallback,
+  useContext,
   useEffect,
   useReducer,
-  useContext,
   useState,
 } from 'react'
 import { Response } from '../types/interfaces'
 import { InitialStateType } from '../types/types'
 import axios from '../utils/axios'
-import { UserActions, UserReducer } from './UserReducer'
 import { Types } from './Types'
+import { UserActions, UserReducer } from './UserReducer'
 
 const initialState = {
   user: {
+    authenticating: true,
     authenticated: false,
     user: {
       Token: null,
@@ -22,9 +23,11 @@ const initialState = {
       Tan: null,
       Hash: null,
       IBAN: null,
-      KrankenKasse: null,
+      Krankenkasse: null,
       Sozialversicherungsnummer: null,
-      Steurklasse: null,
+      Steuerklasse: null,
+      Steueridentifikationsnummer: null,
+      Kirchensteuerpflichtig: null,
     },
   },
 }
@@ -54,23 +57,34 @@ const AppProvider: React.FC = ({ children }) => {
 
   const Token = localStorage.getItem('Token')
 
-  const persistUser = useCallback(async () => {
-    try {
-      if (Token) {
-        const data = await axios.get<any, Response>(`/${Token}`)
-        if (data.data.user) {
-          dispatch({
-            type: Types.SET_USER,
-            payload: {
-              user: data.data.user,
-            },
-          })
-        }
-      }
-    } catch (err) {
-      console.error(err)
+  const test = useCallback(() => {
+    dispatch({
+      type: Types.SET_AUTHENTICATING,
+      payload: {
+        value: true,
+      },
+    })
+    if (Token) {
+      console.log('Token')
+      console.log('state', state)
+      axios.get<any, Response>(`/${Token}`).then((data) => {
+        dispatch({
+          type: Types.SET_USER,
+          payload: {
+            user: data.data.user,
+          },
+        })
+        console.log('data', data)
+      })
+    } else {
+      dispatch({
+        type: Types.SET_AUTHENTICATING,
+        payload: {
+          value: false,
+        },
+      })
     }
-  }, [Token])
+  }, [])
 
   // Merge local state into context state
   useEffect(() => {
@@ -78,11 +92,12 @@ const AppProvider: React.FC = ({ children }) => {
       ...contextState,
       state,
     }))
+    console.log('statee', state)
   }, [state])
 
   useEffect(() => {
-    persistUser()
-  }, [persistUser])
+    test()
+  }, [test])
 
   return (
     <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
@@ -98,4 +113,22 @@ export const useIsAuthenticated = () => {
     },
   } = useContext(AppContext)
   return authenticated
+}
+
+export const useIsAuthenticating = () => {
+  const {
+    state: {
+      user: { authenticating },
+    },
+  } = useContext(AppContext)
+  return authenticating
+}
+
+export const useUser = () => {
+  const {
+    state: {
+      user: { user },
+    },
+  } = useContext(AppContext)
+  return user
 }

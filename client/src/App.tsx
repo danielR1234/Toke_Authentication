@@ -1,34 +1,32 @@
-import React from 'react'
+import { useEffect } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import PageLayout from './Components/PageLayout'
+import { PageLayout } from './Components'
 import { AppProvider } from './Context/Context'
 import { ProtectedRoute } from './Context/ProtectedRoute'
-import EditUser from './views/EditUser'
-import EmailAuthentication from './views/EmailAuthentication/EmailAuthentication'
-import HashAuthentication from './views/TanHashAuthentication/HashAuthentication'
-import TokenAuthentication from './views/TokenAuthentication/TokenAuthentication'
+import { EditUser } from './views/EditUser'
+import { EmailAuthentication } from './views/EmailAuthentication'
+import { HashAuthentication } from './views/HashAuthentication'
+import { TokenAuthentication } from './views/TokenAuthentication'
 
 const App: React.FC = () => {
   return (
-    <AppProvider>
-      <PageLayout>
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<TokenAuthentication />} />
-            <Route path='/email' element={<EmailAuthentication />} />
-            <Route path='/hash' element={<HashAuthentication />} />
-            <Route
-              path='/profile'
-              element={
-                <ProtectedRoute>
-                  <EditUser />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </BrowserRouter>
-      </PageLayout>
-    </AppProvider>
+    <PageLayout>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<TokenAuthentication />} />
+          <Route path='/email' element={<EmailAuthentication />} />
+          <Route path='/hash' element={<HashAuthentication />} />
+          <Route
+            path='/profile'
+            element={
+              <ProtectedRoute>
+                <EditUser />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </PageLayout>
   )
 }
 

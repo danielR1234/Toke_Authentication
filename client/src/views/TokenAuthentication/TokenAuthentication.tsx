@@ -1,14 +1,13 @@
+import TokenForm from './TokenForm'
+import axios from '../../utils/axios'
 import { Box } from '@mui/material'
-import React, { useContext } from 'react'
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+import { useContext } from 'react'
+import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import SectionDefault from '../../Components/SectionDefault'
+import { SectionDefault } from '../../Components'
 import { AppContext } from '../../Context/Context'
 import { Types } from '../../Context/Types'
 import { Response } from '../../types/interfaces'
-
-import axios from '../../utils/axios'
-import TokenForm from './TokenForm'
 
 type FormValues = {
   Token: string
@@ -38,7 +37,7 @@ const TokenAuthentication: React.FC = () => {
             user: data.user,
           },
         })
-        navigate('/tokenandtan')
+        navigate('/hash')
       }
     }
   }

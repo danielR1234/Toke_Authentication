@@ -1,13 +1,13 @@
+import HashForm from './HashForm'
+import axios from '../../utils/axios'
 import { Box, Typography } from '@mui/material'
-import React, { useContext, useState } from 'react'
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+import { useContext, useState } from 'react'
+import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import SectionDefault from '../../Components/SectionDefault'
+import { SectionDefault } from '../../Components'
 import { AppContext } from '../../Context/Context'
 import { Types } from '../../Context/Types'
 import { Response } from '../../types/interfaces'
-import axios from '../../utils/axios'
-import HashForm from './HashForm'
 
 export type FormValues = {
   Token: string

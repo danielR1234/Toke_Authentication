@@ -1,8 +1,6 @@
-import { Box } from '@mui/material'
 import React from 'react'
-import InputEmail from '../../Components/InputEmail'
-import InputToken from '../../Components/InputToken'
-import SubmitButton from '../../Components/SubmitButton'
+import { Box } from '@mui/material'
+import { SubmitButton, InputToken, InputEmail } from '../../Components'
 
 interface Props {}
 
