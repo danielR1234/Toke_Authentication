@@ -14,6 +14,9 @@ const InputKirchensteuerpflichtig = ({ defaultValue }: Props) => {
       name='Kirchensteuerpflichtig'
       control={control}
       defaultValue={defaultValue ? defaultValue : null}
+      rules={{
+        required: false,
+      }}
       render={({ field, fieldState: { error } }) => (
         <TextField
           error={Boolean(error)}

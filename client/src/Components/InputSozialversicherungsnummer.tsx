@@ -14,6 +14,13 @@ const InputSozialversicherungsnummer = ({ defaultValue }: Props) => {
       name='Sozialversicherungsnummer'
       control={control}
       defaultValue={defaultValue ? defaultValue : null}
+      rules={{
+        required: false,
+        pattern: {
+          value: /^(\\d{3}\\-\\d{2}-\\d{4})?$"/i,
+          message: 'No valid Sozialversicherungsnummer',
+        },
+      }}
       render={({ field, fieldState: { error } }) => (
         <TextField
           error={Boolean(error)}

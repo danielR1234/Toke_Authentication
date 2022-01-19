@@ -1,13 +1,12 @@
-import EditUserForm from './EditUserForm'
-import axios from '../../utils/axios'
 import { Box, Typography } from '@mui/material'
 import { useContext, useState } from 'react'
-import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+import { SectionDefault } from '../../Components'
 import { AppContext } from '../../Context/Context'
 import { Types } from '../../Context/Types'
 import { Response } from '../../types/interfaces'
-import { SectionDefault } from '../../Components'
+import axios from '../../utils/axios'
+import EditUserForm from './EditUserForm'
 
 export type FormValues = {
   Mailadresse: string
@@ -21,7 +20,6 @@ export type FormValues = {
 
 const EditUser: React.FC = () => {
   const form = useForm<FormValues>()
-  const navigate = useNavigate()
 
   const [error, setError] = useState<string>('')
   const [success, setSuccess] = useState<string>('')

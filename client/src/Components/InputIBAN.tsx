@@ -13,6 +13,14 @@ const InputIBAN = ({ defaultValue }: Props) => {
       name='IBAN'
       control={control}
       defaultValue={defaultValue ? defaultValue : null}
+      rules={{
+        required: false,
+        pattern: {
+          value:
+            /^([A-Z]{2}[ \-]?[0-9]{2})(?=(?:[ \-]?[A-Z0-9]){9,30}$)((?:[ \-]?[A-Z0-9]{3,5}){2,7})([ \-]?[A-Z0-9]{1,3})?$/i,
+          message: 'No valid IBAN',
+        },
+      }}
       render={({ field, fieldState: { error } }) => (
         <TextField
           error={Boolean(error)}

@@ -14,6 +14,17 @@ const InputSteueridentifikationsnummer = ({ defaultValue }: Props) => {
       name='Steueridentifikationsnummer'
       control={control}
       defaultValue={defaultValue ? defaultValue : null}
+      rules={{
+        required: false,
+        minLength: {
+          value: 11,
+          message: 'no valid Steueridentifikationsnummer',
+        },
+        maxLength: {
+          value: 11,
+          message: 'no valid Steueridentifikationsnummer',
+        },
+      }}
       render={({ field, fieldState: { error } }) => (
         <TextField
           error={Boolean(error)}

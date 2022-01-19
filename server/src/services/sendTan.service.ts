@@ -1,5 +1,4 @@
-import nodemailer, { createTestAccount, createTransport } from 'nodemailer'
-import 'dotenv-safe/config'
+import { createTestAccount, createTransport } from 'nodemailer'
 
 export const sendTan = async (tan: number, email: string) => {
   let testAccount = await createTestAccount()
@@ -7,8 +6,8 @@ export const sendTan = async (tan: number, email: string) => {
   let transporter = createTransport({
     service: 'Gmail',
     auth: {
-      user: process.env.EMAIL,
-      pass: process.env.EMAIL_PASSWORD,
+      user: 'testviscom123@gmail.com',
+      pass: 'viscom123',
     },
   })
 

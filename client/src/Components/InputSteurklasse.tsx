@@ -11,15 +11,26 @@ const InputSteuerklasse = ({ defaultValue }: Props) => {
 
   return (
     <Controller
-      name='Steueridentifikationsnummer'
+      name='Steuerklasse'
       control={control}
       defaultValue={defaultValue ? defaultValue : null}
+      rules={{
+        required: false,
+        minLength: {
+          value: 1,
+          message: 'no valid Steuerklasse',
+        },
+        maxLength: {
+          value: 6,
+          message: 'no valid Steuerklasse',
+        },
+      }}
       render={({ field, fieldState: { error } }) => (
         <TextField
           error={Boolean(error)}
           helperText={error && error.message}
           fullWidth
-          label='Steueridentifikationsnummer'
+          label='Steuerklasse'
           color='secondary'
           {...field}
         />

@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material'
 import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   InputEmail,
   InputIBAN,
@@ -15,6 +16,11 @@ import { AppContext } from '../../Context/Context'
 interface Props {}
 
 const EditUserForm: React.FC = (props: Props) => {
+  const navigate = useNavigate()
+  const logout = () => {
+    localStorage.removeItem('Token')
+    navigate('/')
+  }
   const {
     state: {
       user: { user },
@@ -33,6 +39,11 @@ const EditUserForm: React.FC = (props: Props) => {
   } = user
   return (
     <>
+      <Box>
+        <Typography>
+          <button onClick={logout}> logout </button>
+        </Typography>
+      </Box>
       <Typography>your Token : {Token}</Typography>
       <Box mt={2} mb={2}>
         <InputEmail defaultValue={Mailadresse} />

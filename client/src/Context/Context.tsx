@@ -81,7 +81,7 @@ const AppProvider: React.FC = ({ children }) => {
         },
       })
     }
-  }, [])
+  }, [Token])
 
   // Merge local state into context state
   useEffect(() => {

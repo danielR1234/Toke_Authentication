@@ -1,5 +1,4 @@
-import { User } from './../entities/User'
-import { genRandomTan, saveRandomTan, saveMd5Hash } from '../utils'
+import { genRandomTan, saveMd5Hash, saveRandomTan } from '../utils'
 import { sendTan } from './sendTan.service'
 
 export const saveTanAndHash = async (Token: string, Mailadresse: string) => {

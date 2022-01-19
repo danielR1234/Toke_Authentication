@@ -1,8 +1,7 @@
-import express from 'express'
-import user from './routes/userRoutes'
-import { createConnection } from 'typeorm'
-import 'dotenv-safe/config'
 import cors from 'cors'
+import express from 'express'
+import { createConnection } from 'typeorm'
+import user from './routes/userRoutes'
 
 const main = async () => {
   const connection = await createConnection()
@@ -16,8 +15,8 @@ const main = async () => {
   app.use(cors())
   app.use('/user', user)
 
-  app.listen(process.env.PORT, () => {
-    console.log(`Server starten on port ${process.env.PORT}`)
+  app.listen(4000, () => {
+    console.log(`Server starten on port ${4000}`)
   })
 }
 

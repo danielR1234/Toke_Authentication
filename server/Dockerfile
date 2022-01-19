@@ -4,7 +4,12 @@ WORKDIR /usr/app
 COPY package*.json ./
 RUN npm install
 COPY . .
+COPY .env.production .env
 RUN npm run build
+WORKDIR /dist/app/dist
+COPY .env ./dist/
+
+
 
 # stage 2
 FROM node

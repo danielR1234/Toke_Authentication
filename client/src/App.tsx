@@ -1,7 +1,5 @@
-import { useEffect } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { PageLayout } from './Components'
-import { AppProvider } from './Context/Context'
 import { ProtectedRoute } from './Context/ProtectedRoute'
 import { EditUser } from './views/EditUser'
 import { EmailAuthentication } from './views/EmailAuthentication'

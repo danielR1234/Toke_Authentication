@@ -14,6 +14,13 @@ const InputKrankenkasse = ({ defaultValue }: Props) => {
       name='Krankenkasse'
       control={control}
       defaultValue={defaultValue ? defaultValue : null}
+      rules={{
+        required: false,
+        pattern: {
+          value: /^([A-Z]{1})([\d]{8})([\d]{1})$/i,
+          message: 'No valid Krankenkasse',
+        },
+      }}
       render={({ field, fieldState: { error } }) => (
         <TextField
           error={Boolean(error)}

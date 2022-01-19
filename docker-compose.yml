@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+    frontend:
+            build:
+                context: ./client
+                dockerfile: Dockerfile
+            ports:
+                - "3000:3000"
+            volumes:
+                - ./client:/usr/src/app
+    db:
+      image: postgres
+      environment:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: postgres
+      volumes:
+        - ./pgdata:/var/lib/postgresql/data
+      ports:
+        - "5432:5432"
+    web:
+      build:
+        context: ./server
+        dockerfile: ./Dockerfile
+      depends_on:
+        - db
+      ports:
+        - "4000:4000"
+      volumes:
+        - ./src:/src
