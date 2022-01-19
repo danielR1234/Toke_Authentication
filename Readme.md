@@ -6,6 +6,7 @@ Make sure you have docker installed on your local machine. Then just run
 `docker-compose up`.
 
 - API available at localhost: 4000
+- FRONT END available at localhost: 3000
 
 **Please note:** In case the web container can not establish a connection to the
 DB on the first attend, please stop the container through docker-compose down.
